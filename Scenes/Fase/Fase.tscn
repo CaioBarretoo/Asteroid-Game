@@ -1,0 +1,118 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Font_Text/PixelGameFont.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Fase/Damage.gd" type="Script" id=3]
+[ext_resource path="res://Background/bg_space.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Fase/Fase.gd" type="Script" id=5]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Fase/ShotSpeed.gd" type="Script" id=7]
+[ext_resource path="res://Inimigos/EnemySpawner.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Score/Score.tscn" type="PackedScene" id=9]
+[ext_resource path="res://joystick/virtual_joystick.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Upgrades/Upgrade_Scene/Level_Bar.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Background/Drop_Background/Spawn_Back.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Fase/Speed.gd" type="Script" id=13]
+
+[sub_resource type="DynamicFont" id=20]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=23]
+font_data = ExtResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 328.5, 10 )
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 6.5, 489.5 )
+
+[node name="World" type="Node2D"]
+pause_mode = 1
+
+[node name="Fase" type="ParallaxBackground" parent="."]
+script = ExtResource( 5 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Fase"]
+motion_mirroring = Vector2( 0, 950 )
+
+[node name="Sprite" type="Sprite" parent="Fase/ParallaxLayer"]
+position = Vector2( -1, 2 )
+scale = Vector2( 0.667708, 1.77407 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
+[node name="Virtual joystick" parent="." instance=ExtResource( 10 )]
+margin_left = 2.0
+margin_top = 42.0
+margin_right = 656.0
+margin_bottom = 2023.0
+deadzone_size = 10.0
+clampzone_size = 75.0
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="HealthUI" parent="." instance=ExtResource( 6 )]
+margin_left = 14.0
+margin_top = 2.0
+margin_right = 43.0
+margin_bottom = 10.0
+
+[node name="Spawn_Back" parent="." instance=ExtResource( 12 )]
+
+[node name="EnemySpawner" parent="." instance=ExtResource( 8 )]
+
+[node name="Level_Stats" type="CanvasLayer" parent="."]
+
+[node name="ShotSpeed" type="Label" parent="Level_Stats"]
+margin_left = 4.0
+margin_top = 34.0
+margin_right = 132.0
+margin_bottom = 51.0
+custom_fonts/font = SubResource( 20 )
+script = ExtResource( 7 )
+
+[node name="Damage" type="Label" parent="Level_Stats"]
+margin_left = 4.0
+margin_top = 48.0
+margin_right = 132.0
+margin_bottom = 65.0
+custom_fonts/font = SubResource( 20 )
+script = ExtResource( 3 )
+
+[node name="Speed" type="Label" parent="Level_Stats"]
+margin_left = 4.0
+margin_top = 62.0
+margin_right = 132.0
+margin_bottom = 79.0
+custom_fonts/font = SubResource( 23 )
+script = ExtResource( 13 )
+
+[node name="Limited_Wall" type="StaticBody2D" parent="."]
+z_index = 1
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limited_Wall"]
+position = Vector2( 320, -9 )
+shape = SubResource( 21 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Limited_Wall"]
+position = Vector2( 321, 929 )
+shape = SubResource( 21 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Limited_Wall"]
+position = Vector2( -3.5, 479.5 )
+shape = SubResource( 22 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Limited_Wall"]
+position = Vector2( 643, 478 )
+shape = SubResource( 22 )
+
+[node name="Score" parent="." instance=ExtResource( 9 )]
+
+[node name="Level_Bar" parent="." instance=ExtResource( 11 )]
+position = Vector2( 0, 939 )

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Background/Drop_Background/Objects/Asteroid.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Lunar Lander Assets 24-11-20/Lunar Lander Upload/Space Background/Asteroids.png" type="Texture" id=2]
+
+[node name="Asteroid" type="Sprite"]
+texture = ExtResource( 2 )
+hframes = 4
+script = ExtResource( 1 )

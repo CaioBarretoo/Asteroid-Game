@@ -1,0 +1,170 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/sprite_1-Sheet-export.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 16.0312
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "move"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "idle"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=10]
+blend_point_0/node = SubResource( 6 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 7 )
+blend_point_1/pos = Vector2( 0, 1.2 )
+blend_point_2/node = SubResource( 8 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 9 )
+blend_point_3/pos = Vector2( 0, -1.2 )
+min_space = Vector2( -1, -1.2 )
+max_space = Vector2( 1, 1.2 )
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "move"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "move"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "move"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=15]
+blend_point_0/node = SubResource( 11 )
+blend_point_0/pos = Vector2( 0, 1.2 )
+blend_point_1/node = SubResource( 12 )
+blend_point_1/pos = Vector2( -1, 0 )
+blend_point_2/node = SubResource( 13 )
+blend_point_2/pos = Vector2( 0, -1.2 )
+blend_point_3/node = SubResource( 14 )
+blend_point_3/pos = Vector2( 1, 0 )
+min_space = Vector2( -1, -1.2 )
+max_space = Vector2( 1, 1.2 )
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachine" id=18]
+states/Idle/node = SubResource( 10 )
+states/Idle/position = Vector2( 363, 85.3704 )
+states/Move/node = SubResource( 15 )
+states/Move/position = Vector2( 603, 84.7778 )
+transitions = [ "Idle", "Move", SubResource( 16 ), "Move", "Idle", SubResource( 17 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=19]
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( -255, 220 )
+scale = Vector2( 1.2, 1.2 )
+z_index = 1
+collision_layer = 258
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 496, 569 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 2 )
+hframes = 6
+
+[node name="HurtBoxPlayer" type="Area2D" parent="." groups=["player"]]
+collision_layer = 4
+collision_mask = 0
+
+[node name="HurtCollision" type="CollisionPolygon2D" parent="HurtBoxPlayer"]
+position = Vector2( 497, 554 )
+polygon = PoolVector2Array( -4, 20, -6, 18, -8, 15, -8, 18, -14, 18, -14, 15, -14, 12, -15, 12, -15, 10, -17, 10, -17, 4, -16, 4, -15, 3, -14, 3, -14, 1, -12, 1, -12, 0, -11, 0, -11, -2, -10, -2, -10, -5, -8, -5, -8, -9, -6, -9, -6, -13, -5, -13, -5, -16, -4, -15, -3, -20, -3, -21, -2, -21, -2, -24, 1, -24, 1, -21, 3, -21, 3, -15, 5, -15, 5, -12, 6, -12, 6, -9, 8, -9, 8, -5, 9, -5, 9, -2, 11, -1, 11, 0, 12, 0, 12, 2, 13, 2, 14, 3, 15, 3, 15, 4, 16, 5, 16, 11, 15, 11, 15, 12, 14, 12, 14, 16, 14, 18, 7, 18, 7, 15, 6, 15, 6, 18, 4, 18, 4, 20, 3, 20, 3, 21, -4, 21, -4, 20, -4, 20, -5, 18 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( 497, 559 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
+anims/idle = SubResource( 3 )
+anims/move = SubResource( 4 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 18 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+root_motion_track = NodePath("Sprite:frame")
+parameters/playback = SubResource( 19 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Move/blend_position = Vector2( 0, 0 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 497, 559 )
+scale = Vector2( 0.85, 1 )
+
+[node name="Timer_Shot" type="Timer" parent="."]
+
+[connection signal="area_entered" from="HurtBoxPlayer" to="." method="_on_HurtBoxPlayer_area_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="Timer_Shot" to="." method="_on_Timer_Shot_timeout"]

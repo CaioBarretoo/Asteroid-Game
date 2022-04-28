@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Upgrades/Upgrade_Scene/XP.gd" type="Script" id=1]
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+gravity = Vector3( 0, 20, 0 )
+initial_velocity = 5.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.858824, 1, 0, 1 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 1.11803
+
+[node name="XP" type="Particles2D"]
+rotation = 0.189291
+scale = Vector2( 2, 2 )
+emitting = false
+amount = 10
+lifetime = 2.0
+one_shot = true
+speed_scale = 3.0
+process_material = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -0.188163, -0.982138 )
+shape = SubResource( 2 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

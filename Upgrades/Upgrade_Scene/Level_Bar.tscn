@@ -1,0 +1,117 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Font_Text/PixelGameFont.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Upgrades/Upgrade_Scene/Level_Bar.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 0.854902, 0.184314, 1 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 324.5, 7.5 )
+
+[node name="Level_Bar" type="YSort"]
+pause_mode = 2
+z_index = 1
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_top = 2.0
+margin_right = 640.0
+margin_bottom = 19.0
+
+[node name="Panel2" type="Panel" parent="."]
+margin_left = 2.0
+margin_right = 638.0
+margin_bottom = 21.0
+
+[node name="Experience_Bar" type="ProgressBar" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 638.0
+margin_bottom = 19.0
+custom_styles/fg = SubResource( 6 )
+step = 1.0
+percent_visible = false
+
+[node name="Design" type="Node2D" parent="."]
+z_index = 1
+
+[node name="Panel3" type="Panel" parent="Design"]
+margin_left = 580.0
+margin_top = 2.0
+margin_right = 586.0
+margin_bottom = 19.0
+
+[node name="Panel4" type="Panel" parent="Design"]
+margin_left = 522.0
+margin_top = 2.0
+margin_right = 528.0
+margin_bottom = 19.0
+
+[node name="Panel5" type="Panel" parent="Design"]
+margin_left = 464.0
+margin_top = 2.0
+margin_right = 470.0
+margin_bottom = 19.0
+
+[node name="Panel6" type="Panel" parent="Design"]
+margin_left = 406.0
+margin_top = 2.0
+margin_right = 412.0
+margin_bottom = 19.0
+
+[node name="Panel7" type="Panel" parent="Design"]
+margin_left = 348.0
+margin_top = 2.0
+margin_right = 354.0
+margin_bottom = 19.0
+
+[node name="Panel8" type="Panel" parent="Design"]
+margin_left = 290.0
+margin_top = 2.0
+margin_right = 296.0
+margin_bottom = 19.0
+
+[node name="Panel9" type="Panel" parent="Design"]
+margin_left = 232.0
+margin_top = 2.0
+margin_right = 238.0
+margin_bottom = 19.0
+
+[node name="Panel10" type="Panel" parent="Design"]
+margin_left = 174.0
+margin_top = 2.0
+margin_right = 180.0
+margin_bottom = 19.0
+
+[node name="Panel11" type="Panel" parent="Design"]
+margin_left = 116.0
+margin_top = 2.0
+margin_right = 122.0
+margin_bottom = 19.0
+
+[node name="Panel12" type="Panel" parent="Design"]
+margin_left = 58.0
+margin_top = 2.0
+margin_right = 64.0
+margin_bottom = 19.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 598.0
+margin_top = 4.0
+margin_right = 644.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 314.5, 2.5 )
+shape = SubResource( 7 )
